@@ -1,0 +1,29 @@
+.line {
+    clear: both;
+}
+
+.cell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #666;
+    float: left;
+    background: #e9e9e9;
+}
+
+.alive {
+    background: #06BE38;
+}
+
+#game-of-life {
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.btn {
+    clear: both;
+    width: 100%;
+}
+
+#reset {
+    display: none;
+}

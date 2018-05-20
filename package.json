@@ -1,0 +1,25 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "Game of Life implementation for IT Talents Code Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "Felix Betzl",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jquery": "^3.3.2",
+    "css-loader": "^0.28.11",
+    "ts-loader": "^4.2.0",
+    "typescript": "^2.8.3",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.1.2"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "style-loader": "^0.21.0"
+  }
+}

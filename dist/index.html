@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game of Life</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="text-center"><h1>Game of Life</h1></div>
+        <div class="pull-left">Generation: <span id="generation"></span></div>
+        <div class="pull-right">Highscore: <span id="highscore"></span></div>
+        <div id="game-of-life"></div>
+        <div class="text-center" id="button">
+            <div class="btn btn-success" id="go">Go!</div>
+            <div class="btn btn-danger" id="reset">Reset!</div>
+        </div>
+        <h2>Anleitung</h2>
+        <p>Mit der linken Maustasten kannst du auf dem Spielfeld einen Initialzustand definieren. Grüne Zellen sind lebendig, graue Zellen sind tot. Das Spiel wird mit einem Klick auf die Schaltfläche "Go" gestartet.</p>
+        <h2>Spielregeln</h2>
+        <p>Die nächste Generation an lebenden Zellen (also der Status aller Zellen in der nächsten Spielrunde) wird durch ein einfaches Regelset berechnet:</p>
+        <ol>
+            <li>Jede lebende Zelle, die weniger als 2 lebende Nachbarzellen hat, stirbt</li>
+            <li>Jede lebende Zelle, die 2 oder 3 lebendige Nachbarzellen hat, lebt weiter</li>
+            <li>Jede lebende Zelle, die mehr als 3 lebende Nachbarzellen hat, stirbt</li>
+            <li>Jede tote Zelle, die genau 3 lebende Nachbarzellen hat, wird lebendig</li>
+        </ol>
+        <em>Quelle: <a href="https://www.it-talents.de/foerderung/code-competition/code-competition-05-2018">IT Talents</a></em>
+    </div>
+    <script src="game-of-life.js"></script>
+</body>
+</html>
