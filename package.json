@@ -10,6 +10,10 @@
   "keywords": [],
   "author": "Felix Betzl",
   "license": "MIT",
+  "repository": { 
+    "type" : "git",
+    "url" : "https://github.com/Flixlef/game-of-life.git"
+  },
   "devDependencies": {
     "@types/jquery": "^3.3.2",
     "css-loader": "^0.28.11",

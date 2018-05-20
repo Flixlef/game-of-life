@@ -125,7 +125,7 @@ export class GameOfLife {
 
     /**
      * Finds all neighbour cells of a given cell, if you have a more sophisticated solution
-     * please write me on Github (https://github.com/Flixlef) :)
+     * please write me on Github (https://github.com/Flixlef/game-of-life) :)
      * @param cell  Cell for which the neighbours should be found
      * @returns     Array of all neighbour cells
      */
