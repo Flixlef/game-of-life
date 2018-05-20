@@ -80,6 +80,7 @@ export class GameOfLife {
             return;
         }
 
+        // update scores and render new cells
         this.generation++;
         this.highscore = this.generation > this.highscore ? this.generation : this.highscore;
         this.cells = updatedCells;
@@ -238,15 +239,17 @@ export class GameOfLife {
      * Checks if there are any cells on the board alive
      * @returns     Boolean if the game is alive (true) or dead (false)
      */
-    private isGameAlive(): boolean {
+    private areCellsAlive(): boolean {
         for(var i : number = 1; i <= Settings.GAME_SIZE; i++) {
             for(var j : number = 1; j <= Settings.GAME_SIZE; j++) {
+                // any cell alive is enough
                 if(this.cells[i][j].isAlive()) {
                     return true;
                 }
             }
         }
 
+        // no cell is alive
         return false;
     }
 
@@ -257,7 +260,7 @@ export class GameOfLife {
      */
     private hasGameEnded(newCellField: Cell[][]): boolean {
         // check if every cell is dead
-        if(!this.isGameAlive()) {
+        if(!this.areCellsAlive()) {
             return true;
         }
 

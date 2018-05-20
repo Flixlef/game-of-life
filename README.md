@@ -1,4 +1,4 @@
-# Game of Life
+# Game of Life ()
 
 A simple Game of Life implementation using TypeScript and HTML 5. This project was created for the [IT Talents Code Challenge](https://www.it-talents.de/foerderung/code-competition/code-competition-05-2018).
 
@@ -25,7 +25,7 @@ npm run build
 
 ### Developing
 
-These guidelines will help where to start depending on what you look.
+These short guidelines will help you, where to start depending on what you look for.
 
 #### src/cell.ts
 
