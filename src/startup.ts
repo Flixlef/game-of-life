@@ -24,5 +24,10 @@ $("document").ready(function(): void {
         $("#reset").hide();
         Game.reset();
     });
+
+    $("#show-state").click(function():void {
+        var stateNumber : number = <number>$("#state-number").val();
+        Game.showState(stateNumber);
+    });
 });
 

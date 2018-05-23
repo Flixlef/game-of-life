@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: './src/startup.ts',
+  devtool: 'inline-source-map',
   mode: 'production',
   watch: true,
   output: {
