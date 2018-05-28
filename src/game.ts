@@ -87,7 +87,6 @@ export class GameOfLife {
             clearInterval(this.handle);
             if(State.stateIsDead(nextState)) {
                 this.state = nextState;
-                return;
             }
             this.draw();
             return;
