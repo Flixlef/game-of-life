@@ -3,6 +3,7 @@ import { Settings } from "./settings";
 
 export class State {
     private cells : Cell[][];
+    private hashCode : string;
 
     constructor() {
         this.cells = [];
@@ -13,28 +14,47 @@ export class State {
                 this.cells[i][j] = new Cell(i, j);
             }
         }
+
+        this.updateHashCode();
     }
 
+    /**
+     * Gets hashCode for the state
+     */
+    public getHashCode(): string {
+        return this.hashCode;
+    }
+
+    /**
+     * Switches alive state for a specific cell
+     * @param x x coordinate of the cell
+     * @param y y coordinate of the cell
+     */
     public switchAlive(x: number, y: number): void {
         this.cells[x][y].switchAlive();
     }
 
+    /**
+     * Calculates the next state for a given state
+     * @param state the given state
+     */
     public nextState(state: State): State {
         var nextState : State = new State();
 
         for(var i : number = 1; i <= Settings.GAME_SIZE; i++) {
             for(var j : number = 1; j <= Settings.GAME_SIZE; j++) {
-                var aliveNeighbours : number = this.countAliveNeighbours(this.cells[i][j]);
-                nextState.cells[i][j] = this.cells[i][j].applyRules(aliveNeighbours);
+                var aliveNeighbours : number = state.countAliveNeighbours(this.cells[i][j]);
+                nextState.cells[i][j] = state.cells[i][j].applyRules(aliveNeighbours);
             }
         }
 
+        nextState.updateHashCode();
         return nextState;
     }
 
     /**
      * Checks if there are any cells on the board alive
-     * @returns     Boolean if the game is alive (true) or dead (false)
+     * @returns Boolean if the game is alive (true) or dead (false)
      */
     public static stateIsDead(state: State): boolean {
         for(var i : number = 1; i <= Settings.GAME_SIZE; i++) {
@@ -50,6 +70,9 @@ export class State {
         return true;
     }
 
+    /**
+     * Returns the state as a printable HTML string
+     */
     public toHtml(): string {
         var html : string = "";
         for(var i : number = 1; i <= Settings.GAME_SIZE; i++) {
@@ -61,6 +84,30 @@ export class State {
         }
 
         return html;
+    }
+
+    /**
+     * Compares equality of the current state with a given state
+     * @param state the given state
+     */
+    public compareHashCode(state: State): boolean {
+        return this.getHashCode() === state.getHashCode();
+    }
+
+    /**
+     * Recalculates the hashCode
+     */
+    private updateHashCode(): void {
+        var hashArray : string[] = [];
+
+        for(var i : number = 1; i <= Settings.GAME_SIZE; i++) {
+            for(var j : number = 1; j <= Settings.GAME_SIZE; j++) {
+                hashArray.push(this.cells[i][j].isAlive().toString());
+            }
+        }
+
+        var hash : string = hashArray.join("");
+        this.hashCode = hash;
     }
 
     /**

@@ -31,9 +31,13 @@ These short guidelines will help you, where to start depending on what you look 
 
 Contains the model for one Cell object.
 
+### src/state.ts
+
+Contains model for the states. Each generation is represented by a state object
+
 #### src/game.ts
 
-Contains the logic for most of the game. Stores all Cell objects and provides a public interface to interact with the game.
+Contains the logic for most of the game. Stores all state objects and provides a public interface to interact with the game.
 
 #### src/settings.ts
 
@@ -49,6 +53,7 @@ If you want to use the script on a website simple paste the following HTML snipp
 
 ```
 <!-- insert where you want the game to appear --!>
+<div><h1>Game of Life</h1></div>
 <div>Generation: <span id="generation"></span></div>
 <div>Highscore: <span id="highscore"></span></div>
 <div id="game-of-life"></div>
@@ -56,6 +61,13 @@ If you want to use the script on a website simple paste the following HTML snipp
     <div id="go">Go!</div>
     <div id="reset">Reset!</div>
 </div>
+<div id="message-box">
+    <h2>Info</h2>
+    <div id="message"></div>
+</div>
+<label for="state-number">Bestimmte Generation anzeigen</label>
+<input id="state-number" class="form-control" type="number" placeholder="3" />
+<div id="show-state">Lade Generation</div>
 <!-- insert below before you close your body tag --!>
 <script src="game-of-life.js"></script>
 ```

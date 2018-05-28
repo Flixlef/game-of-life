@@ -7,6 +7,13 @@
     <title>Game of Life</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        #message-box {
+            border: 1px solid #333;
+            padding: 0 15px 15px 15px;
+            margin: 15px 0 30px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -18,12 +25,28 @@
             <div class="btn btn-success" id="go">Go!</div>
             <div class="btn btn-danger" id="reset">Reset!</div>
         </div>
-        <input type="number" id="state-number">
-        <div id="show-state">Show State!</div>
+        <div id="message-box" class="text-center">
+            <h2>Info</h2>
+            <div id="message"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="state-number">Bestimmte Generation anzeigen</label>
+                        <input id="state-number" class="form-control" type="number" placeholder="3">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="show-state" class="btn btn-primary">Lade Generation</div>
+            </div>
+        </div>
+    
         <h2>Anleitung</h2>
         <p>Mit der linken Maustaste kannst du auf dem Spielfeld einen Initialzustand definieren. Grüne Zellen sind lebendig, graue Zellen sind tot. Das Spiel wird mit einem Klick auf die Schaltfläche "Go" gestartet.</p>
         <h2>Spielregeln</h2>
-        <p>Die nächste Generation an lebenden Zellen (also der Status aller Zellen in der nächsten Spielrunde) wird durch ein einfaches Regelset berechnet:</p>
+        <p><strong>Abwandlung:</strong> Neu zum Original ist es den Highscore zu knacken :)! Versuche, dass dein Spielfeld sich so oft wie möglich entwickelt. Dauerzustände und Wiederholungen werden nicht gewertet. Die nächste Generation an lebenden Zellen (also der Status aller Zellen in der nächsten Spielrunde) wird durch ein einfaches Regelset berechnet:</p>
         <ol>
             <li>Jede lebende Zelle, die weniger als 2 lebende Nachbarzellen hat, stirbt</li>
             <li>Jede lebende Zelle, die 2 oder 3 lebendige Nachbarzellen hat, lebt weiter</li>

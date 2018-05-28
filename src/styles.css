@@ -19,6 +19,10 @@
     margin-bottom: 40px;
 }
 
+#game-of-life.enabled {
+    cursor: pointer;
+}
+
 .btn {
     clear: both;
     width: 100%;

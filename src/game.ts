@@ -1,6 +1,7 @@
 import { Settings } from "./settings";
 import { Cell } from "./cell";
 import { State } from "./state";
+import { Message } from "./message";
 
 export class GameOfLife {
     // handle of the intervall function, is needed to stop it
@@ -9,6 +10,7 @@ export class GameOfLife {
     private highscore : number;
     private state : State;
     private previousStates : State[];
+    private nextMessage : string;
 
     constructor() {
         this.highscore = 0;
@@ -43,12 +45,22 @@ export class GameOfLife {
         this.startNewGame();
     }
 
+    /**
+     * Shows a specific state
+     * @param state chronological number of the specific state
+     */
     public showState(state: number): void {
         if(this.handle !== undefined) {
             clearInterval(this.handle);
         }
 
-        this.state = this.previousStates[state - 1];
+        if(state > this.previousStates.length) {
+            this.nextMessage = Message.GENERATION_NOT_FOUND;
+        } else {
+            this.state = this.previousStates[state - 1];
+            this.nextMessage = Message.GENERATION_LOADED;
+        }
+
         this.draw();
     }
 
@@ -60,6 +72,7 @@ export class GameOfLife {
         this.previousStates = [];
         this.previousStates.push(this.state);
         this.generation = 0;
+        this.nextMessage = Message.NEW_GAME;
         this.draw();
     }
 
@@ -67,13 +80,19 @@ export class GameOfLife {
      * Evaluates the next generation
      */
     private nextRound(): void {
+        var nextState : State = this.state.nextState(this.state);
+
         // stop game if there is no evolution happening
-        if(State.stateIsDead(this.state)) {
+        if(this.gameHasEnded(nextState)) {
             clearInterval(this.handle);
+            if(State.stateIsDead(nextState)) {
+                this.state = nextState;
+                return;
+            }
+            this.draw();
             return;
         }
 
-        var nextState : State = this.state.nextState(this.state);
         this.previousStates.push(nextState);
 
         // update scores and render new cells
@@ -84,6 +103,48 @@ export class GameOfLife {
     }
 
     /**
+     * Checks if the game ends with a given state
+     * @param state the given state
+     */
+    private gameHasEnded(state : State): boolean {
+        // board is dead
+        if(State.stateIsDead(state)) {
+            this.nextMessage = Message.DEAD_GAME;
+            return true;
+        }
+
+        // deadlock, no further evolution happening
+        if(this.gameHasInfiniteLoop(state)) {
+            this.nextMessage = Message.INFINITE_LOOP;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the game is in an infinite loop with a given state
+     * @param state the given state
+     */
+    private gameHasInfiniteLoop(state : State): boolean {
+        for(var i : number = 0; i < this.previousStates.length; i++) {
+            if(state.compareHashCode(this.previousStates[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if a given state results in a deadlock
+     * @param state the given state
+     */
+    private gameHasDeadlock(state : State): boolean {
+        return this.previousStates[this.previousStates.length - 1].compareHashCode(state);
+    }
+
+    /**
      * Draws the game (cells + generation counter) onto the DOM
      */
     private draw(): void {
@@ -91,6 +152,7 @@ export class GameOfLife {
         document.getElementById("game-of-life").innerHTML = html;
         document.getElementById("generation").innerHTML = this.generation.toString();
         document.getElementById("highscore").innerHTML = this.highscore.toString();
+        document.getElementById("message").innerHTML = this.nextMessage;
     }
 
     /**
